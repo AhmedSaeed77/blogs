@@ -4,12 +4,15 @@ namespace Modules\Blog\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 use Illuminate\Routing\Controller;
 use Modules\Blog\Entities\Post1Model;
 //use Modules\Blog\Entities\Comment1Model;
 use Modules\Blog\Entities\Comment1Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -20,8 +23,19 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post1Model::all();
-        return view('posts.index',['posts'=>$posts]);
-        //return view('posts.index');
+
+        $car = Carbon::now()->toDateString();
+        $arr = [];
+        foreach($posts as $post)
+        {
+            if($car == $post->created_at->toDateString())
+            {
+                $arr[] = $post->created_at->toDateString();
+            } 
+        }
+        $count = count($arr);
+        
+        return view('posts.index',['posts'=>$posts,'count'=>$count]);
     }
 
     public function add()
@@ -33,15 +47,17 @@ class PostController extends Controller
         $request->validate([
             'title'=>'required|unique:posts|string',
             'auth'=>'required',
-            'content'=>'required',
+            'content'=>'required|max:20',
             'date'=>'required',
             'image'=>'required|mimes:jpg,png,webp|max:20000',
+            //'pdf' => 'required'
           ],[
              'title'=>' عنوان المقال مطلوب ',
              'auth'=>' مؤلف المقال مطلوب ',
-             'content'=>'محتوى المقال مطلوب',
+             'content'=>'محتوى المقال اكثر من 20 حرف',
              'date'=>'تاريخ المقال مطلوب',
              'image'=>'صوره  المقال مطلوب  ', 
+             //'pdf'=>'مقال مطلوبه اقصى حجم 2 ميجا  ',
           ]);
 
         $post = new Post1Model();
@@ -50,11 +66,15 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->date = $request->date;
 
-        $file = $request->file('image');
-        $filename = $file->getClientOriginalName();
-        $file->move('images/posts',$filename);
-        $post->image = $filename;
-        
+        $filename = $request->file('image');
+        $path = 'images/posts';
+        $post->image = uploadMedia($filename,$path);
+
+
+        // $file = $request->file('pdf');
+        // $filename = $file->getClientOriginalName();
+        // $file->move('images/posts/pdf',$filename);
+        // $post->pdf = $filename;
         
         $post->save();
         return redirect()->route('index');
@@ -63,6 +83,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post1Model::find($id);
+        
         return view('posts.edit', ['post'=>$post]);
     }
 
@@ -77,7 +98,8 @@ class PostController extends Controller
           ],[
              'title'=>' عنوان المقال مطلوب ',
              'auth'=>' مؤلف المقال مطلوب ',
-             'content'=>'محتوى المقال مطلوب',
+             //'content'=>'محتوى المقال مطلوب',
+             'content'=>'محتوى المقال اكثر من 20 حرف',
              'date'=>'تاريخ المقال مطلوب',
             // 'image'=>'صوره  المقال مطلوب  ', 
           ]);
@@ -135,6 +157,14 @@ class PostController extends Controller
         $comment->date = $request->date;
         $comment->save();
         return redirect()->back();
+    }
+
+    public function download($id)
+    {
+        $post = Post1Model::findOrFail($id);
+        $f = $post->pdf ;
+        $file_path = 'images/posts/pdf/'.$f;
+        return response()->download( $file_path);
     }
 
 }

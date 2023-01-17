@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::all();
-        return view('posts.index',['posts'=>$posts]);
+        $car = Carbon::now()->toDateString();
+        return view('posts.index',['posts'=>$posts,'car'=>$car]);
     }
 
     public function add()
@@ -27,13 +29,15 @@ class PostController extends Controller
             'auth'=>'required',
             'content'=>'required',
             'date'=>'required',
+            //'image'=>'required',
             'image'=>'required|mimes:jpg,png,webp|max:20000',
           ],[
              'title'=>' عنوان المقال مطلوب ',
              'auth'=>' مؤلف المقال مطلوب ',
              'content'=>'محتوى المقال مطلوب',
              'date'=>'تاريخ المقال مطلوب',
-             'image'=>'صوره  المقال مطلوب  ', 
+             'image'=>'صوره  المقال مطلوبه اقصى حجم 2 ميجا  ',
+             'pdf'=>'مقال مطلوبه اقصى حجم 2 ميجا  ', 
           ]);
 
         $post = new Post();
@@ -46,6 +50,11 @@ class PostController extends Controller
         $filename = $file->getClientOriginalName();
         $file->move('images/posts',$filename);
         $post->image = $filename;
+
+        $file = $request->file('pdf');
+        $filename = $file->getClientOriginalName();
+        $file->move('images/posts/pdf',$filename);
+        $post->pdf = $filename;
         
         
         $post->save();
@@ -107,7 +116,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        $comments = Comment::where('post_id',$id)->get();
+        $comments = Post::with('comments')->get();
+        
+        //$comments = Comment::where('post_id',$id)->get();
         return view('comments.show', ['comments'=>$comments,'post'=>$post]);
     }
     public function add_comment(Request $request,$id)

@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    {{-- {{ now()->format('Y-m-d') }} --}}
+                    
+                {{-- {{ count(\App\Models\Post::all()) }} --}}
                 </div>
             </div>
         </div>

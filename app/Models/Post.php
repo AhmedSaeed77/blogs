@@ -15,7 +15,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    public $fillable = [ 'id' , 'title' , 'content' , 'auth','date','image' ];
+    public $fillable = [ 'id' , 'title' , 'content' , 'auth','date','image' ,'pdf'];
 
     protected $cascadeDeletes = ['comments'];
 

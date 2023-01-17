@@ -20,7 +20,7 @@ class Post1Model extends Model
 
     protected $table = 'post1_models';
 
-    public $fillable = [ 'id' , 'title' , 'content' , 'auth','date','image' ];
+    public $fillable = [ 'id' , 'title' , 'content' , 'auth','date','image','pdf' ];
 
     protected $cascadeDeletes = ['comments'];
 

@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+  <a href={{ route('post.download',$post->id) }} class="btn btn-large pull-right"><i class="icon-download-alt"> </i> Download PDF </a>
 <br>
 <center class="fs-1">Post</center>
 <table class="table" class = "cotainer">

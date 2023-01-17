@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\DB;
     $file->move($path,$filename);
     return $filename;
  }
+
+
+    function uploadMedia($image, $path)
+    {
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('images//' . $path), $imageName);
+        return $imageName;
+    }
