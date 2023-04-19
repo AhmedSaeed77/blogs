@@ -63,6 +63,10 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
+
+                                <div class="g-recaptcha" data-sitekey="6Lci90ckAAAAAP4ajLEtqK4ehKvl_RLlPiyFda0B"></div>
+                                <br/>
+
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>

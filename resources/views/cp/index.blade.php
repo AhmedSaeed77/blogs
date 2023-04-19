@@ -1,5 +1,6 @@
 @extends('cp.layouts.master')
 @section('css')
+
 <!--  Owl-carousel css-->
 <link href="{{asset('cp/assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
 <!-- Maps css -->
@@ -10,10 +11,10 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi,{{Auth::user()->name}} welcome back!</h2>
 						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
 						</div>
-					</div>
+					</div>	
 					<div class="main-dashboard-header-right">
 						<div>
 							<label class="tx-13">Customer Ratings</label>
@@ -32,6 +33,8 @@
 					</div>
 				</div>
 				<!-- /breadcrumb -->
+				<div>
+				</div>
 @endsection
 @section('content')
 				<!-- row -->
@@ -128,7 +131,7 @@
 				<!-- row closed -->
 
 				<!-- row opened -->
-				<div class="row row-sm">
+				{{-- <div class="row row-sm">
 					<div class="col-md-12 col-lg-12 col-xl-7">
 						<div class="card">
 							<div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
@@ -166,11 +169,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- row closed -->
 
 				<!-- row opened -->
-				<div class="row row-sm">
+				{{-- <div class="row row-sm">
 					<div class="col-xl-4 col-md-12 col-lg-12">
 						<div class="card">
 							<div class="card-header pb-1">
@@ -344,11 +347,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- row close -->
 
 				<!-- row opened -->
-				<div class="row row-sm row-deck">
+				{{-- <div class="row row-sm row-deck">
 					<div class="col-md-12 col-lg-4 col-xl-4">
 						<div class="card card-dashboard-eight pb-2">
 							<h6 class="card-title">Your Top Countries</h6><span class="d-block mg-b-10 text-muted tx-12">Sales performance revenue based by country</span>
@@ -433,7 +436,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- /row -->
 			</div>
 		</div>
@@ -460,4 +463,6 @@
 <!--Internal  index js -->
 <script src="{{asset('cp/assets/js/index.js')}}"></script>
 <script src="{{asset('cp/assets/js/jquery.vmap.sampledata.js')}}"></script>	
+
+
 @endsection

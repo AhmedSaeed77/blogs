@@ -2,91 +2,100 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
+    public function logout()
     {
-        if(view()->exists($id)){
-            return view($id);
+        auth()->guard('admin')->logout();
+        toastr()->error('You are logged out');
+        return redirect('check');
+    }
+
+    public function logoutuser()
+    {
+        auth()->guard('web')->logout();
+        toastr()->error('You are logged out');
+        return redirect('checkuser');
+    }
+
+    public function check()
+    {
+        return view('auth.login');
+    }
+    public function login(Request $request)
+    {
+        $remember_me = $request->has('remember_me') ? true : false;
+        if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) 
+        {
+            toastr()->success('Welcome to the site');
+            return redirect('/valex');
+        } 
+        else 
+        {
+            return redirect('check');
+        }
+    }
+
+    public function checkuser()
+    {
+        return view('auth.loginuser');
+    }
+
+    public function checkuserlogin(Request $request)
+    {
+        $remember_me = $request->has('remember_me') ? true : false;
+        if (auth()->guard('web')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) 
+        {
+            toastr()->success('Welcome to the site');
+            return redirect('userpage');
+        } 
+        else 
+        {
+            return redirect('checkuser');
+        }
+    }
+
+    public function registeruser()
+    {
+        return view('auth.registeruser');
+    }
+
+    public function storeuser(Request $request)
+    {
+        $user = new  User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->password == $request->confirm)
+        {
+            $user->password = Hash::make($request->password);
         }
         else
         {
-            return view('cp.404');
-        }
-
-     //   return view($id);
+            return redirect()->back();
+        } 
+        $user->save();
+        return redirect('userpage');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $admin = new  Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = $request->password;
+        $admin->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function index()
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // return view('admin.type.index');
+        //return view('admin.index');
     }
 }

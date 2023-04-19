@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -195,6 +195,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class
+        //Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+     
 
     ],
 
@@ -212,6 +215,11 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         Intervention\Image\ImageServiceProvider::class,
+        Illuminate\Auth\Access\GateServiceProvider::class,
+        
+        
     ])->toArray(),
-
+    'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+    
 ];

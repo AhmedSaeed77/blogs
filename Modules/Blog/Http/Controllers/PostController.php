@@ -16,6 +16,17 @@ use Carbon\Carbon;
 
 class PostController extends Controller
 {
+    public function getlivewire()
+    {
+        $posts = Post1Model::all();
+        return view('livewire',['posts'=>$posts]);
+    }
+
+    public function  livewire()
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable

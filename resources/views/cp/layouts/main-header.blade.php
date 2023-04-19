@@ -16,18 +16,31 @@
 							<input class="form-control" placeholder="Search for anything..." type="search"> <button class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
 						</div>
 					</div>
+					
 					<div class="main-header-right">
 						<ul class="nav">
 							<li class="">
 								<div class="dropdown  nav-itemd-none d-md-flex">
 									<a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
-										<span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img src="{{asset('cp/assets/img/flags/us_flag.jpg')}}" alt="img"></span>
+										<span class="avatar country-Flag mr-0 align-self-center bg-transparent">
+											@if(LaravelLocalization::setLocale() == 'en')
+												<img src="{{asset('cp/assets/img/flags/us_flag.jpg')}}" alt="img">
+											@else
+												<img src="{{asset('cp/assets/img/flags/eypt_flag.png')}}" alt="img">
+											@endif
+										</span>
 										<div class="my-auto">
-											<strong class="mr-2 ml-2 my-auto">English</strong>
+											{{-- <strong class="mr-2 ml-2 my-auto">English</strong> --}}
 										</div>
 									</a>
 									<div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-										<a href="#" class="dropdown-item d-flex ">
+										@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+										
+											<a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+												{{ $properties['native'] }}
+											</a>
+										@endforeach
+										{{-- <a href="#" class="dropdown-item d-flex ">
 											<span class="avatar  ml-3 align-self-center bg-transparent"><img src="{{asset('cp/assets/img/flags/french_flag.jpg')}}" alt="img"></span>
 											<div class="d-flex">
 												<span class="mt-2">French</span>
@@ -56,7 +69,7 @@
 											<div class="d-flex">
 												<span class="mt-2">spain</span>
 											</div>
-										</a>
+										</a> --}}
 									</div>
 								</div>
 							</li>
@@ -258,12 +271,16 @@
 											</div>
 										</div>
 									</div>
-									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
+									<a class="dropdown-item" href="{{route('profile.editprofile')}}"><i class="bx bx-user-circle"></i>Profile</a>
 									<a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
 									<a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
 									<a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
 									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
-									<a class="dropdown-item" href="{{ url('/' . $page='page-signin') }}"><i class="bx bx-log-out"></i> Sign Out</a>
+									{{-- <a class="dropdown-item" href="{{ url('/' . $page='page-signin') }}"><i class="bx bx-log-out"></i> Sign Out</a> --}}
+									<a href="{{ route('logout') }}" class="dropdown-item"><i class="bx bx-log-out"></i> Sign Out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
 								</div>
 							</div>
 							<div class="dropdown main-header-message right-toggle">
