@@ -1,15 +1,19 @@
-<?php
-
-return [
-
-   
-    'Index' => 'Index',
-    'Type' => 'Type',
-    'Blogs' => 'Blogs',
-    'Add_Images' => 'Add Images ',
-    'Edit_Images' => 'Edit Images ',
-    'Grades' => 'Grades',
-    'Section' => 'Section',
-    'Level' => 'Level',
-    'Projects' => 'Projects',
-];
+<?php return array (
+  'password' => 'Passwords must be at least six characters and match the confirmation.',
+  'reset' => 'Your password has been reset!',
+  'sent' => 'We have e-mailed your password reset link!',
+  'token' => 'This password reset token is invalid.',
+  'user' => 'We can\'t find a user with that e-mail address.',
+  'test' => 'asd',
+  'Grades' => 'Grades',
+  'Section' => 'Section',
+  'Type' => 'Type',
+  'Index' => 'Index',
+  'Blog' => 'Blog',
+  'Blogs' => 'Blogs',
+  'Level' => 'Level',
+  'Projects' => 'Projects',
+  'Add_Image' => 'Add_Image',
+  'Add_Images' => 'Add Images',
+  'Edit_Images' => 'Edit Images',
+);

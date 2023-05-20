@@ -22,6 +22,11 @@ use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UpdateProfile;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\NotificationSendController;
+use App\Http\Controllers\FirebaseController;
+use App\Http\Controllers\QueueController;
+use App\Http\Controllers\SettingLanguageController;
 use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -60,6 +65,7 @@ Route::get('/recapcha', function () {
        
 Route::get('/testtest', [TestController::class, 'testtest'])->name('testtest');
 Route::get('/index', [TestController::class, 'index'])->name('post1.index');
+
 //Route::get('/testtest', [TestController::class, 'testtest'])->name('testtest');
 //Route::get('/testtest', [TestController::class, 'testtest'])->name('testtest');
 
@@ -86,10 +92,17 @@ Route::group(['middleware' => ['auth:web']], function () {
 });
 });
 
+
+Route::get('firebase', [FirebaseController::class, 'index'])->name('firebase');
+Route::group(['middleware' => 'auth'],function(){
+    Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
+    Route::post('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send.web-notification');
+    //Route::get('/test45', [NotificationSendController::class, 'sendNotification'])->name('test');
+});
+
 Route::group(['middleware' => 'prevent-back-history'], function () {
 
     Route::group(['middleware' => ['auth:admin']], function () {
-        
 
         Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
         
@@ -135,6 +148,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::post('/delete', [ProjectController::class, 'delete'])->name('delete');
             Route::post('/update', [ProjectController::class, 'update'])->name('update');
 
+            Route::get('/photo', [ProjectController::class, 'photo'])->name('photo');
+            Route::get('/showresource/{id}', [ProjectController::class, 'showresource'])->name('showresource');
+
             Route::get('/exportprint', [ProjectController::class, 'exportprint'])->name('exportprint');
             Route::get('/exportpdf', [ProjectController::class, 'exportpdf'])->name('exportpdf');
 
@@ -146,6 +162,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
             Route::post('/delete', [RoleController::class, 'delete'])->name('delete');
             Route::post('/update', [RoleController::class, 'update'])->name('update');
+        });
+
+        Route::group(['prefix' => 'firebase', 'as' => 'firebase.'], function () {
+            Route::get('/', [FirebaseController::class, 'index'])->name('firebase');
         });
 
         Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
@@ -169,6 +189,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('/getimagesvue/{id}', [BlogController::class, 'getimagesvue'])->name('getimagesvue');
             Route::post('/deleteimage', [BlogController::class, 'deleteimage'])->name('deleteimage');
             Route::post('/updateimage', [BlogController::class, 'updateimage'])->name('updateimage');
+
+            Route::get('/allphoto', [BlogController::class, 'allphoto'])->name('allphoto');
         });
 
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
@@ -180,6 +202,23 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
             Route::get('/editprofile',[UpdateProfile::class, 'showUpdateFormadmin'])->name('editprofile');
             Route::post('/updateprofile', [UpdateProfile::class, 'updateprofile1'])->name('updateprofile');
+        });
+
+        Route::group(['prefix' => 'languages', 'as' => 'languages.'], function () {
+            Route::get('lang/{lang}', [SettingLanguageController::class, 'translate'])->name('lang');
+            Route::post('trans/{lang}',[SettingLanguageController::class, 'translate_submit'])->name('translate_submit');
+            Route::post('addkey', [SettingLanguageController::class, 'translate_add'] )->name('translate_add');
+            Route::post('delete/{lang}', [SettingLanguageController::class, 'delete'] )->name('delete');
+        });
+
+        Route::group(['prefix' => 'excel', 'as' => 'excel.'], function () {
+            Route::get('/', [ExcelController::class, 'showform'])->name('showform');
+            Route::post('/store',[ExcelController::class, 'importExcel'])->name('store');
+        });
+
+        Route::group(['prefix' => 'queue', 'as' => 'queue.'], function () {
+            Route::get('/queue',[QueueController::class, 'sendmail'])->name('queue');
+            //Route::post('/updateprofile', [UpdateProfile::class, 'updateprofile1'])->name('updateprofile');
         });
 
     });

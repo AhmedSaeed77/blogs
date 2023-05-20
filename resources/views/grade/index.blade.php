@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-lg mg-t-10 mg-lg-t-0">
                                     <label class="form-label">  الوصف</label>
-                                    <textarea id="desc" class="form-control desc    " v-model='desc' name="desc" placeholder=".... " ></textarea>
+                                    <textarea  class="form-control     " v-model='desc' name="desc" placeholder=".... " ></textarea>
                                 </div>
                             </div>
                             <button type="submit" @click="saveData" class="btn btn-primary mt-3 mb-0">حفظ</button>

@@ -57,7 +57,7 @@ class GradeController extends Controller
 
     public function delete(Request $request)
     {
-        $t = Type::find($request->id);
+        $t = Grade::find($request->id);
         $t->delete();
         return response()->json(['err' => false, 'msg', 'تم الحذف بنجاح'], 200);
     }

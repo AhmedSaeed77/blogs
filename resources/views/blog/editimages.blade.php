@@ -40,7 +40,7 @@ margin-bottom: 8px!important;">
                             
                             <div class="col-12 col-md-4">
                                 <label class="form-label">    Image  </label>
-                                <input  class="form-control"  name="image"     type="file">
+                                <input  class="form-control"  name="image" v-model="image"  type="file">
                             </div>
                         </div>
                             <button class="m-5 btn btn-primary" @click="savedata" type="button">  save </button>
@@ -90,7 +90,7 @@ margin-bottom: 8px!important;">
                 el:'#activty',
                 data:{
                     activityId:'',
-                    //image : '',
+                    image : '',
                     images:[],
                     error:[],
                 },
@@ -110,7 +110,6 @@ margin-bottom: 8px!important;">
                         return 0;
                     }
                 },
-
                     getimages:function()
                     {
                         console.log(this.activityId);
@@ -121,18 +120,19 @@ margin-bottom: 8px!important;">
                             this.images=response.data.blogimages;
 
                         }).catch(reject => {
-                        var response = $.parseJSON(reject.responseText);
-                        $.each(response.errors, function(name, msg) {
-                            swal({
-                                title: msg[0],
-                                type: 'warning',
-                                confirmButtonText: 'ok',
+                            var response = $.parseJSON(reject.responseText);
+                            $.each(response.errors, function(name, msg) {
+                                swal({
+                                    title: msg[0],
+                                    type: 'warning',
+                                    confirmButtonText: 'ok',
+                                });
+                                return 0
                             });
-                            return 0
-                        });
-                    })
+                        })
                     },
-                    deleteFunction:function(id) {
+                    deleteFunction:function(id) 
+                    {
                         const id1 = id;
                         Swal.fire({
                             title: 'Are you sure?',
@@ -142,7 +142,6 @@ margin-bottom: 8px!important;">
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#DD6B55',
-                        
                             confirmButtonText: 'Yes, delete it!'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -178,8 +177,10 @@ margin-bottom: 8px!important;">
                                 }
                             })
                     },
-                savedata:function(){
+                savedata:function()
+                {
                     this.error = []
+                    this.validation(this.image , ' اختر الصوره  ')
                     this.validation(this.activityId , ' اختر المقال  ')
                     if (this.error.length !== 0) {
                             return false
@@ -190,24 +191,24 @@ margin-bottom: 8px!important;">
                     axios.post('{{ route('blog.updateimage') }}', formData).then(response => {
                         if (response.data.err == true) 
                         {
-                            swal({
-                                    title: response.data.msg,
-                                    type: 'warning',
-                                    background: 'white',
-                                    confirmButtonText: 'موافق',
-                                });
+                            Swal.fire({
+                                        title: response.data.msg,
+                                        type: 'warning',
+                                        background: 'white',
+                                        confirmButtonText: 'موافق',
+                                    });
                         } 
                         else 
                         {
-                            swal({
-                                    title: response.data.msg,
-                                    type: 'success',
-                                    background: 'white',
-                                    confirmButtonText: 'موافق',
-                                });
+                            Swal.fire({
+                                        title: 'تم الاضافه بنجاح',
+                                        type: 'success',
+                                        background: 'white',
+                                        confirmButtonText: 'موافق',
+                                    });
                             app.getimages();
                         }
-                        //this.getimages();
+                        app.getimages();
                     }).catch(response => {
                         console.log(response)
                     })

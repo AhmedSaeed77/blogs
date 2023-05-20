@@ -197,7 +197,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class
         //Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
-     
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Providers\RepoServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
     ],
 
@@ -221,5 +223,7 @@ return [
     ])->toArray(),
     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
-    
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    'Image' => Intervention\Image\Facades\Image::class,
+    'Agent' => Jenssegers\Agent\Facades\Agent::class,
 ];

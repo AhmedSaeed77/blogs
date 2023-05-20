@@ -77,12 +77,12 @@
 														<label>Confirm</label> <input name='confirm' class="form-control" placeholder="Enter your confirm" type="password" required>
 													</div>
 													<br>
-														
+													<div class="d-flex justify-content-between">
+														<p>  <a href="{{ route('student.password.request') }}"> Login with Facebook </a></p>
+														<p>  <a href="{{ route('student.password.request') }}"> Login with Google </a></p>
+													</div>
 													<button type="submit" id="sup"  class="btn btn-main-primary btn-block"> دخول </button>
-													
 												</form>
-
-												
 											</div>
 										</div>
 									</div>

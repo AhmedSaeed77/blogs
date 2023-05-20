@@ -15,20 +15,29 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->name = $request->name;
         $blog->desc = $request->desc;
+        // $filename = $request->file('image');
+        // $path = 'images/blogs';
+        // $blog->image = uploadMedia($filename,$path);
 
-        $filename = $request->file('image');
-        $path = 'images/blogs';
-
-        $blog->image = uploadMedia($filename,$path);
+        $blog->setImageAttribute($request->file('image'));
         $blog->save();
 
 
         return response()->json(['err' => false, 'msg' => 'تم الحفظ بنجاح'], 200);
     }
 
+    public function allphoto()
+    {
+        $data = Blog::all();
+        foreach($data as $d)
+        {
+            $d->getImageAttribute();
+        }
+        return $data;
+    }
+
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Blog::latest()->get();
             return Datatables::of($data)

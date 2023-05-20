@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Section;
 use App\Models\Grade;
+use App\Models\Type;
 use App\Models\Transcode;
 use Illuminate\Http\Request;
 use DataTables;
@@ -64,7 +65,7 @@ class SectionController extends Controller
 
     public function delete(Request $request)
     {
-        $t = Type::find($request->id);
+        $t = Section::find($request->id);
         $t->delete();
         return response()->json(['err' => false, 'msg', 'تم الحذف بنجاح'], 200);
     }

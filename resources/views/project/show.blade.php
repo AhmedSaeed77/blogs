@@ -90,7 +90,7 @@
                                     }
                                 @endphp
                                 <!-- add_form -->
-                                <form action="{{ route('project.update', 'test') }}" method="post">
+                                <form action="{{ route('project.update', 'test') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col">
@@ -109,6 +109,10 @@
                                                 <input type="checkbox"  name="type[]" value="{{ $type->id }}" {{is_array($arr) && in_array($type->id, $arr) ? 'checked' : '' }}><br>
                                             @endforeach    
                                         </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1">الصوره:</label><br>
+                                        <input type="file"  name="image" ><br>  
                                     </div>
                                     
                                     <br><br>
@@ -167,7 +171,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
                             <div class="modal-body">
-                                <form  action="{{route('project.store')}}" method="POST" class="needs-validation was-validated"  id="createType">
+                                <form  action="{{route('project.store')}}" method="POST" class="needs-validation was-validated"  id="createType" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col">
@@ -184,6 +188,10 @@
                                                 <label for="exampleFormControlTextarea1">{{ $type->type }}</label>
                                                 <input type="checkbox"  name="type[]" value="{{ $type->id }}"><br>
                                             @endforeach    
+                                        </div>
+                                        <div class="col">
+                                            <label for="exampleFormControlTextarea1">الصوره:</label><br>
+                                            <input type="file"  name="image" required><br>  
                                         </div>
                                     </div>
                                     <br>

@@ -1,14 +1,19 @@
-<?php
-
-return [
-
-    'Index' => 'الرئيسيه',
-    'Type' => 'الانواع',
-    'Blogs' => 'المقالات',
-    'Add_Images' => 'اضافه صور',
-    'Edit_Images' => 'تعديل الصور',
-    'Grades' => 'المراحل',
-    'Section' => 'الصفوف',
-    'Level' => 'الفصول',
-    'Projects' => 'المشاريع' ,
-];
+<?php return array (
+  'password' => 'الرقم السرى',
+  'reset' => 'ريسيت',
+  'sent' => 'ارسال',
+  'token' => 'التوكن',
+  'user' => 'المستخدم',
+  'test' => 'اختبار',
+  'Grades' => 'المراحل',
+  'Section' => 'الصفوف',
+  'Type' => 'النوع',
+  'Index' => 'الرئيسيه',
+  'Blog' => 'المقالات',
+  'Blogs' => 'المقالات',
+  'Level' => 'الفصول',
+  'Projects' => 'المشاريع',
+  'Add_Image' => 'Add_Image',
+  'Add_Images' => 'اضافه صور',
+  'Edit_Images' => 'تعديل الصور',
+);

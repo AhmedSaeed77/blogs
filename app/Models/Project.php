@@ -18,4 +18,9 @@ class Project extends Model
         return $this->belongsToMany(Type::class, 'project_types');
     }
 
+    public function photos()
+    {
+        return $this->morphMany(Photo::class,'photoable');
+    }
+
 }
