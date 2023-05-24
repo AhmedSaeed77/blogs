@@ -26,6 +26,7 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SettingLanguageController;
 use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -162,6 +163,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
             Route::post('/delete', [RoleController::class, 'delete'])->name('delete');
             Route::post('/update', [RoleController::class, 'update'])->name('update');
+        });
+
+        Route::group(['prefix' => 'cache', 'as' => 'cache.'], function () {
+            Route::get('/', [YoutubeController::class, 'index'])->name('index');
         });
 
         Route::group(['prefix' => 'firebase', 'as' => 'firebase.'], function () {

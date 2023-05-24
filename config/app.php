@@ -200,6 +200,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\RepoServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
@@ -218,6 +220,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         Intervention\Image\ImageServiceProvider::class,
         Illuminate\Auth\Access\GateServiceProvider::class,
+
         
         
     ])->toArray(),
@@ -226,4 +229,5 @@ return [
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     'Image' => Intervention\Image\Facades\Image::class,
     'Agent' => Jenssegers\Agent\Facades\Agent::class,
+    'Debugbar' => Barryvdh\Debugbar\ServiceProvider::class,
 ];
