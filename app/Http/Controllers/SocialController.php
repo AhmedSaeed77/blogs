@@ -1,62 +1,46 @@
 <?php
 
 namespace App\Http\Controllers;
-//use Socialite;
 use App\Models\User;
-//use Auth;
 use Illuminate\Support\Facades\Auth;
-
 use Laravel\Socialite\Facades\Socialite;
-
-
 use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
     public function redirect($provider)
     {
-        //return Socialite::driver($provider)->redirect();
-        $link = Socialite::with($provider)->stateless()->redirect()->getTargetUrl();
-        return response()->json(['link'=>$link],200);
+        return Socialite::driver($provider)->redirect();
+        // $link = Socialite::with($provider)->stateless()->redirect()->getTargetUrl();
+        // return response()->json(['link'=>$link],200);
     }
 
-   
     //$userSocial =  Socialite::driver($provider)->user();
 
-    public function Callback($provider){
-        $userSocial =   Socialite::with($provider)->stateless()->user();
-       
-        $users       =   User::where(['email' => $userSocial->getEmail()])->first();
+    public function Callback($provider)
+    {
+        //dd(111);
+        $userSocial =   Socialite::driver($provider)->stateless()->user();
         //dd($provider);
+        $users       =   User::where(['email' => $userSocial->getEmail()])->first();
         if($users)
         {
-            //dd($userSocial);
-            $token =  $users->createToken($userSocial->getEmail())->plainTextToken;
-            $url = 'https://marsawaves.com/user/check/';
-            return redirect($url.$token);
+            Auth::login($users);
+            return redirect()->route('userpage');
         }
         else
         {
-            //dd($userSocial);
-            if($provider == 'facebook')
-            {
-                return redirect('https://marsawaves.com');
+        $user = User::create([
+                    'name'          => $userSocial->getName(),
+                    'email'         => $userSocial->getEmail(),
+                    //'image'         => $userSocial->getAvatar(),
+                    'provider_id'   => $userSocial->getId(),
+                    'provider'      => $provider,
+                ]);
+             return redirect()->route('userpage');
             }
-            $user = User::create([
-                'fname'          => $userSocial->getName(),
-                'lname'          => $userSocial->getName(),
-                'email'         => $userSocial->getEmail(),
-                'image'         => $userSocial->getAvatar(),
-                'provider_id'   => $userSocial->getId(),
-                'provider'      => $provider,
-            ]);
-            
-            $token =  $user->createToken($userSocial->getEmail())->plainTextToken;
-            $url = 'https://marsawaves.com/user/check/';
-            return redirect($url.$token);
-     
-        }
     }
+
     public function checkSocial(Request $request)
     {
         $user = $request->user();

@@ -55,13 +55,18 @@
                     <td>{{ $project->name }}</td>
                     <td>{{ $project->status }}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                            data-target="#edit{{ $project->id }}"
-                            title="تعديل مشروع"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                            data-target="#delete{{ $project->id }}"
-                            title="حذف مشروع"><i
-                                class="fa fa-trash"></i></button>
+                        @can('project.edit')
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                data-target="#edit{{ $project->id }}"
+                                title="تعديل مشروع"><i class="fa fa-edit"></i>
+                            </button>
+                        @endcan
+                        @can('project.delete')
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                data-target="#delete{{ $project->id }}"
+                                title="حذف مشروع"><i class="fa fa-trash"></i>
+                            </button>
+                        @endcan
                     </td>
                 </tr>
 

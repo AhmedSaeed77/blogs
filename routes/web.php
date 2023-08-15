@@ -27,6 +27,7 @@ use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\SettingLanguageController;
 use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -63,6 +64,9 @@ Route::get('/alerts', function () {
 Route::get('/recapcha', function () {
     return view('recapcha');
 });
+
+Route::get('login/{provider}', [SocialController::class, 'redirect'])->name('redirect');
+Route::get('login/{provider}/callback', [SocialController::class, 'Callback'])->name('callback');
        
 Route::get('/testtest', [TestController::class, 'testtest'])->name('testtest');
 Route::get('/index', [TestController::class, 'index'])->name('post1.index');
@@ -86,19 +90,18 @@ Route::get('registeruser', [AdminController::class, 'registeruser'])->name('regi
 Route::post('registeruser', [AdminController::class, 'storeuser'])->name('storeuser');
 Route::any('logoutuser', [AdminController::class, 'logoutuser'])->name('logoutuser');
 
-Route::group(['middleware' => 'prevent-back-history'], function () {
-Route::group(['middleware' => ['auth:web']], function () {
+// Route::group(['middleware' => 'prevent-back-history'], function () {
+//Route::group(['middleware' => ['auth:web']], function () {
 
     Route::get('/userpage', function () {return view('user');})->name('userpage');
-});
-});
+// });
+// });
 
 
 Route::get('firebase', [FirebaseController::class, 'index'])->name('firebase');
 Route::group(['middleware' => 'auth'],function(){
     Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
     Route::post('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send.web-notification');
-    //Route::get('/test45', [NotificationSendController::class, 'sendNotification'])->name('test');
 });
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
@@ -142,7 +145,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('/fetch', [LevelController::class, 'fetch'])->name('fetch');
         });
 
-        Route::group(['prefix' => 'project', 'as' => 'project.'], function () {
+        Route::group(['prefix' => 'project', 'as' => 'project.','middleware' => 'can:project'], function () {
             Route::get('/', [ProjectController::class, 'index'])->name('index');
             Route::post('/store', [ProjectController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('edit');
@@ -171,6 +174,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::group(['prefix' => 'firebase', 'as' => 'firebase.'], function () {
             Route::get('/', [FirebaseController::class, 'index'])->name('firebase');
+        });
+
+        Route::group(['prefix' => 'gmail', 'as' => 'gmail.'], function () {
+            Route::get('/', [MailController::class, 'index'])->name('index');
         });
 
         Route::group(['prefix' => 'users', 'as' => 'users.'], function () {

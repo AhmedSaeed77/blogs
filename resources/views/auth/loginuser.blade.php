@@ -73,6 +73,10 @@
 														<div class="uk-width-expand@s">
 															<p>  <a href="{{ route('student.password.request') }}">هل نسيت كلمه المرور ؟</a></p>
 														</div>
+														<div class="d-flex justify-content-between">
+															<p>  <a href="{{ url('/login/facebook') }}">login facebook </a></p>
+															<p>  <a href="{{ url('/login/google') }}">login google </a></p>
+														</div>
 													<button type="submit" id="sup"  class="btn btn-main-primary btn-block"> دخول </button></div>
 													
 												</form>

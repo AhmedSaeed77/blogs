@@ -36,10 +36,12 @@ class AdminController extends Controller
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")])) 
         {
             toastr()->success('Welcome to the site');
+            //return response()->json('success', 200);
             return redirect()->route('valex.index');
         } 
         else 
         {
+            //return response()->json('error', 404);
             return redirect('check');
         }
     }

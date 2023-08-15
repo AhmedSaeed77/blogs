@@ -202,6 +202,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -230,4 +231,5 @@ return [
     'Image' => Intervention\Image\Facades\Image::class,
     'Agent' => Jenssegers\Agent\Facades\Agent::class,
     'Debugbar' => Barryvdh\Debugbar\ServiceProvider::class,
+    'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 ];
