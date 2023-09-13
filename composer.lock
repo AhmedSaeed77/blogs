@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d331054525887c9732a732ade88b62b",
+    "content-hash": "7f61e73b6bdfb043d1decf9ee9c7247d",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -839,6 +839,51 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "ekram/schema-forge",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ekram-Muahammad/laravel-SchemaForge.git",
+                "reference": "7d7e64cb0b07cebe4571c96292719bc69d234457"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ekram-Muahammad/laravel-SchemaForge/zipball/7d7e64cb0b07cebe4571c96292719bc69d234457",
+                "reference": "7d7e64cb0b07cebe4571c96292719bc69d234457",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "Laravel": {
+                    "providers": [
+                        "Ekram\\SchemaForge\\SchemaForgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ekram\\SchemaForge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ekram Amin",
+                    "email": "ekram.developer@gmail.com"
+                }
+            ],
+            "description": "Laravel Package to create crud operation",
+            "support": {
+                "issues": "https://github.com/Ekram-Muahammad/laravel-SchemaForge/issues",
+                "source": "https://github.com/Ekram-Muahammad/laravel-SchemaForge/tree/main"
+            },
+            "time": "2023-09-06T18:29:23+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -12780,7 +12825,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ekram/schema-forge": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

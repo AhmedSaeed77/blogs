@@ -1,0 +1,65 @@
+{
+         "info":{"_postman_id":"65017d05771f3","name":"countries Collection","description":"countries CRUD operation","schema":"https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"},
+         "item":[
+            {
+        "name": "find countries",
+        "request": {
+            "url": "{{baseUrl}}/api/countries/1",
+            "method": "GET"
+        },
+        "response": []
+},
+            {
+        "name": "show countries records",
+        "request": {
+            "url": "{{baseUrl}}/api/countries/findAll?page=1",
+            "method": "GET"
+        },
+        "response": []
+},
+                {
+        "name": "Delete countries",
+        "request": {
+            "url": "{{baseUrl}}/api/countries/1",
+            "method": "DELETE"
+        },
+        "response": []
+    }
+,
+            {
+        "name": "create countries",
+        "request": {
+            "url": "{{baseUrl}}/api/countries",
+            "method": "POST",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\"name_en\":\"\",\"name_ar\":\"\",\"number_city\":\"\"}"
+            }
+        },
+        "response": []
+    },
+               {
+        "name": "Update countries",
+        "request": {
+            "url": "{{baseUrl}}/api/countries/1",
+            "method": "PUT",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\"name_en\":\"\",\"name_ar\":\"\",\"number_city\":\"\"}"
+            }
+        },
+        "response": []
+}
+        ]}

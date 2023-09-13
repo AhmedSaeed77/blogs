@@ -204,6 +204,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        Ekram\SchemaForge\SchemaForgeServiceProvider::class, 
+
     ],
 
     /*

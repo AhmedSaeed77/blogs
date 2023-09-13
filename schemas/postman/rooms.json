@@ -1,0 +1,65 @@
+{
+         "info":{"_postman_id":"65017e09d8080","name":"rooms Collection","description":"rooms CRUD operation","schema":"https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"},
+         "item":[
+            {
+        "name": "find rooms",
+        "request": {
+            "url": "{{baseUrl}}/api/rooms/1",
+            "method": "GET"
+        },
+        "response": []
+},
+            {
+        "name": "show rooms records",
+        "request": {
+            "url": "{{baseUrl}}/api/rooms/findAll?page=1",
+            "method": "GET"
+        },
+        "response": []
+},
+                {
+        "name": "Delete rooms",
+        "request": {
+            "url": "{{baseUrl}}/api/rooms/1",
+            "method": "DELETE"
+        },
+        "response": []
+    }
+,
+            {
+        "name": "create rooms",
+        "request": {
+            "url": "{{baseUrl}}/api/rooms",
+            "method": "POST",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\"name_en\":\"\",\"name_ar\":\"\",\"number_city\":\"\"}"
+            }
+        },
+        "response": []
+    },
+               {
+        "name": "Update rooms",
+        "request": {
+            "url": "{{baseUrl}}/api/rooms/1",
+            "method": "PUT",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\"name_en\":\"\",\"name_ar\":\"\",\"number_city\":\"\"}"
+            }
+        },
+        "response": []
+}
+        ]}

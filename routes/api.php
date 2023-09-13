@@ -1,4 +1,8 @@
-<?php
+<?php 
+ use App\Http\Controllers\Api\RoomController; 
+ 
+ use App\Http\Controllers\Api\CountryController; 
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +26,19 @@ Route::get('/', function () {return "test";})->name('test');
 
 
 
+
+Route::group(['prefix' => 'countries'], function () {
+    Route::get('/findAll', [CountryController::class, 'findAll']);
+    Route::get('/{id}', [CountryController::class, 'find']);
+    Route::post('/', [CountryController::class, 'store']);
+    Route::put('/{country}', [CountryController::class, 'update']);
+    Route::delete('/{country}', [CountryController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'rooms'], function () {
+    Route::get('/findAll', [RoomController::class, 'findAll']);
+    Route::get('/{id}', [RoomController::class, 'find']);
+    Route::post('/', [RoomController::class, 'store']);
+    Route::put('/{room}', [RoomController::class, 'update']);
+    Route::delete('/{room}', [RoomController::class, 'delete']);
+});

@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "^2.0",
+        "ekram/schema-forge": "dev-main",
         "guzzlehttp/guzzle": "^7.5",
         "intervention/image": "^2.7",
         "jenssegers/agent": "^2.6",

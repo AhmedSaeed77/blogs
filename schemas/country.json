@@ -1,0 +1,51 @@
+{
+    "tableName": "countries",
+    "migration": true,
+    "seeder": true,
+    "seederNumRows": 10,
+    "resourceController": true,
+    "apiController": true,
+    "views": true,
+    "postman":true,
+    "columns": [
+        {
+            "name": "name_en",   
+            "type": "string",
+            "length": "255",
+            "nullable": false,
+            "unique": false,
+            "defaultValue": "",
+            "index": "",
+            "hasRelation": false,
+            "relation":{
+                "relationType":"",
+                "relatedTable":"",
+                "relatedColumn":"",
+                "intermediateModel":"",
+                "tagetModel":""
+            }
+        },
+        {
+            "name": "name_ar",
+            "type": "string",
+            "length": "255",
+            "nullable": false,
+            "unique": true,
+            "defaultValue": "",
+            "index": "Unique"
+         
+        },
+        {
+            "name": "number_city",
+            "type": "string",
+            "length": "255",
+            "nullable": false,
+            "unique": false,
+            "defaultValue": "",
+            "index": "",
+            "hasRelation": false,
+            "relatedTable":"",
+            "relatedColumn":""
+        }
+    ]
+}

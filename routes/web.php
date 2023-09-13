@@ -1,4 +1,8 @@
-<?php
+<?php 
+ use App\Http\Controllers\RoomController; 
+ 
+ use App\Http\Controllers\CountryController; 
+
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -279,3 +283,5 @@ Route::get('/payment', [TestController::class, 'payment'])->name('payment');
 Route::get('tap-payment', [TapController::class,'form'])->name('tap.form');
 Route::post('tap-payment', [TapController::class,'payment'])->name('tap.payment');
 Route::any('tap-callback',[TapController::class,'callback'])->name('tap.callback');
+Route::resource('countries', CountryController::class);
+Route::resource('rooms', RoomController::class);
