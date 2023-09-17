@@ -256,7 +256,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     });
 
     
-
+View::composer(['*'] , function ($view){
+    $username = "Ahmed Saeed";
+    $view->with('username',$username);
+});
 
 
 //Auth::routes();
