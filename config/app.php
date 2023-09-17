@@ -203,8 +203,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-
         Ekram\SchemaForge\SchemaForgeServiceProvider::class, 
+        //Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class
 
     ],
 

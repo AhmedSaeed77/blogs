@@ -9,6 +9,7 @@
         "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "^2.0",
         "ekram/schema-forge": "dev-main",
+        "gussrw/laravel-routes": "^1.1",
         "guzzlehttp/guzzle": "^7.5",
         "intervention/image": "^2.7",
         "jenssegers/agent": "^2.6",
