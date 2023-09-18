@@ -88,6 +88,8 @@ Route::get('check', [AdminController::class, 'check'])->name('login');
 Route::any('login', [AdminController::class, 'login'])->name('alogin');
 Route::any('logout', [AdminController::class, 'logout'])->name('logout');
 
+
+
 Route::get('checkuser', [AdminController::class, 'checkuser'])->name('loginuser');
 Route::post('checkuser', [AdminController::class, 'checkuserlogin'])->name('checkuserlogin');
 Route::get('registeruser', [AdminController::class, 'registeruser'])->name('registeruser');
